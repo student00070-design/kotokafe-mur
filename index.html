@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мур · котокафе — кава, коти та трохи тиші</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===================== BASE ===================== */
+:root{
+  --cream:      #FAF6F0;
+  --cream-2:    #F1E8DC;
+  --brown-900:  #2E211A;
+  --brown-700:  #4A382C;
+  --brown-500:  #7A5C45;
+  --brown-300:  #B99A7E;
+  --brown-100:  #E6D7C7;
+  --white:      #FFFFFF;
+  --shadow:     0 30px 60px -40px rgba(46,33,26,.55);
+  --radius:     20px;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:'Jost', system-ui, sans-serif;
+  font-weight:400;
+  background:var(--cream);
+  color:var(--brown-900);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img{ display:block; max-width:100%; }
+a{ color:inherit; }
+h1,h2,h3{ font-family:'Cormorant Garamond', Georgia, serif; font-weight:400; }
+
+.container{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+/* ===================== TYPO HELPERS ===================== */
+.eyebrow{
+  display:flex; align-items:center; gap:14px;
+  font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--brown-500); margin-bottom:22px;
+}
+.eyebrow::before{
+  content:''; width:36px; height:1px; background:var(--brown-300);
+}
+
+/* ===================== BUTTONS ===================== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:15px 32px; border-radius:100px;
+  background:var(--brown-900); color:var(--cream);
+  border:1px solid var(--brown-900);
+  font-size:13.5px; letter-spacing:.06em; text-decoration:none;
+  cursor:pointer; font-family:inherit;
+  transition:background .3s ease, color .3s ease, transform .3s ease, border-color .3s ease;
+}
+.btn:hover{ background:var(--brown-700); border-color:var(--brown-700); transform:translateY(-2px); }
+
+.btn--ghost{ background:transparent; color:var(--brown-900); }
+.btn--ghost:hover{ background:var(--brown-900); color:var(--cream); }
+
+.btn--small{ padding:11px 22px; font-size:12px; }
+
+/* ===================== NAV ===================== */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:100;
+  padding:20px 0;
+  transition:padding .35s ease, background .35s ease, box-shadow .35s ease;
+}
+.nav.scrolled{
+  padding:12px 0;
+  background:rgba(250,246,240,.86);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 rgba(46,33,26,.08);
+}
+.nav__inner{
+  max-width:1180px; margin:0 auto; padding:0 24px;
+  display:flex; align-items:center; gap:36px;
+}
+
+.logo{
+  font-family:'Cormorant Garamond', serif;
+  font-size:26px; letter-spacing:.28em; text-transform:lowercase;
+  text-decoration:none; color:var(--brown-900);
+  display:flex; align-items:baseline; gap:2px;
+  padding-left:.28em;
+}
+.logo span{ color:var(--brown-300); font-size:30px; line-height:1; }
+
+.nav__links{
+  display:flex; gap:30px; margin-left:auto;
+}
+.nav__links a{
+  position:relative;
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--brown-700); text-decoration:none;
+  padding:4px 0;
+}
+.nav__links a::after{
+  content:''; position:absolute; left:0; bottom:0;
+  width:0; height:1px; background:var(--brown-500);
+  transition:width .35s ease;
+}
+.nav__links a:hover::after{ width:100%; }
+
+.nav__links a.accent{ color:var(--brown-900); font-weight:500; }
+
+.burger{
+  display:none; flex-direction:column; gap:5px;
+  width:34px; height:34px; align-items:center; justify-content:center;
+  background:none; border:none; cursor:pointer; padding:0;
+}
+.burger span{
+  display:block; width:22px; height:1.5px; background:var(--brown-900);
+  transition:transform .35s ease, opacity .25s ease;
+}
+.burger.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2){ opacity:0; }
+.burger.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+
+/* ===================== HERO ===================== */
+.hero{
+  max-width:1180px; margin:0 auto;
+  padding:150px 24px 90px;
+  display:grid; grid-template-columns:1.05fr .95fr;
+  gap:70px; align-items:center;
+}
+
+.hero h1{
+  font-size:clamp(44px, 5.6vw, 78px);
+  line-height:1.02;
+  letter-spacing:-.02em;
+}
+.hero h1 em{ font-style:italic; color:var(--brown-500); }
+
+.hero__lead{
+  margin-top:28px; max-width:44ch;
+  font-size:16.5px; font-weight:300; color:var(--brown-700);
+}
+
+.hero__actions{
+  margin-top:42px; display:flex; flex-wrap:wrap; gap:14px;
+}
+
+.hero__meta{
+  margin-top:56px; display:flex; gap:48px;
+  padding-top:28px; border-top:1px solid var(--brown-100);
+}
+.hero__meta div strong{
+  display:block;
+  font-family:'Cormorant Garamond', serif;
+  font-size:30px; font-weight:500; line-height:1.1;
+}
+.hero__meta div small{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--brown-500);
+}
+
+.hero__media{ position:relative; }
+.hero__media img{
+  width:100%; aspect-ratio:4/5; object-fit:cover;
+  border-radius:200px 200px var(--radius) var(--radius);
+}
+.hero__badge{
+  position:absolute; left:-28px; bottom:52px;
+  background:var(--white);
+  padding:18px 26px; border-radius:16px;
+  box-shadow:var(--shadow);
+  font-family:'Cormorant Garamond', serif;
+  font-size:22px; line-height:1.2;
+}
+.hero__badge small{
+  display:block; margin-top:4px;
+  font-family:'Jost', sans-serif;
+  font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--brown-500);
+}
+
+/* ===================== SECTIONS ===================== */
+.section{ padding:110px 0; }
+.section--tint{ background:var(--cream-2); }
+
+.section__head{ max-width:640px; margin-bottom:60px; }
+.section__head h2{
+  font-size:clamp(34px, 4vw, 54px);
+  line-height:1.08; letter-spacing:-.015em;
+}
+.section__head h2 em{ font-style:italic; color:var(--brown-500); }
+.section__head p{
+  margin-top:18px; font-weight:300; color:var(--brown-700); font-size:16px;
+}
+
+/* ===================== MENU GRID ===================== */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:28px;
+}
+
+.dish{
+  background:var(--white);
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(46,33,26,.06);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s ease;
+}
+.dish:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--shadow);
+}
+
+.dish__img{ aspect-ratio:4/3; overflow:hidden; background:var(--cream-2); }
+.dish__img img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.dish:hover .dish__img img{ transform:scale(1.06); }
+
+.dish__body{ padding:22px 24px 26px; }
+.dish__row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:18px;
+}
+.dish__row h3{
+  font-size:23px; font-weight:500; line-height:1.2;
+}
+.dish__price{
+  font-size:14.5px; color:var(--brown-500); white-space:nowrap;
+  letter-spacing:.02em;
+}
+.dish__body p{
+  margin-top:7px; font-size:14px; font-weight:300;
+  color:var(--brown-500); line-height:1.5;
+}
+
+/* ===================== CATS GALLERY ===================== */
+.gallery{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;
+}
+.gallery figure{
+  position:relative; overflow:hidden; border-radius:16px;
+  aspect-ratio:1/1; background:var(--cream-2);
+}
+.gallery figure:first-child{
+  grid-column:span 2; aspect-ratio:auto;
+}
+.gallery img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.3,1);
+}
+.gallery figure:hover img{ transform:scale(1.07); }
+.gallery figcaption{
+  position:absolute; left:16px; bottom:14px;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:#fff; text-shadow:0 1px 10px rgba(0,0,0,.6);
+  opacity:0; transform:translateY(6px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.gallery figure:hover figcaption{ opacity:1; transform:none; }
+
+/* ===================== ADOPTION ===================== */
+.adopt-intro{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:70px; align-items:center; margin-bottom:70px;
+}
+
+.adopt-intro__text h2{
+  font-size:clamp(34px, 4vw, 54px);
+  line-height:1.08; letter-spacing:-.015em;
+}
+.adopt-intro__text h2 em{ font-style:italic; color:var(--brown-500); }
+.adopt-intro__text p{
+  margin-top:20px; font-weight:300; color:var(--brown-700); font-size:16px;
+}
+.adopt-intro__text p + p{ margin-top:14px; }
+
+.adopt-intro__img img{
+  width:100%; aspect-ratio:5/4; object-fit:cover;
+  border-radius:24px;
+}
+
+/* cards */
+.adopt-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:28px;
+}
+
+.adopt-card{
+  background:var(--white);
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(46,33,26,.06);
+  display:flex; flex-direction:column;
+  transition:transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s ease;
+}
+.adopt-card:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--shadow);
+}
+
+.adopt-card__img{
+  position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--cream-2);
+}
+.adopt-card__img img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.adopt-card:hover .adopt-card__img img{ transform:scale(1.06); }
+
+.adopt-card__tag{
+  position:absolute; top:14px; left:14px;
+  background:rgba(250,246,240,.94);
+  color:var(--brown-900);
+  padding:6px 14px; border-radius:100px;
+  font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+}
+
+.adopt-card__body{
+  padding:22px 24px 26px;
+  display:flex; flex-direction:column; gap:12px;
+  flex:1;
+}
+
+.adopt-card__row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+}
+.adopt-card__row h3{
+  font-size:24px; font-weight:500; line-height:1.15;
+}
+.adopt-card__age{
+  font-size:13px; color:var(--brown-500); white-space:nowrap;
+}
+
+.adopt-card__desc{
+  font-size:14px; font-weight:300; color:var(--brown-500); line-height:1.55;
+}
+
+.adopt-card__meta{
+  display:flex; flex-wrap:wrap; gap:8px;
+  padding-top:4px;
+}
+.adopt-card__meta span{
+  font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--brown-500);
+  background:var(--cream-2);
+  padding:5px 12px; border-radius:100px;
+}
+
+.adopt-card__body .btn{
+  margin-top:auto;
+  width:100%;
+}
+
+/* ===================== STEPS ===================== */
+.steps{
+  margin-top:0;
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+}
+
+.step{
+  background:var(--white);
+  border-radius:var(--radius);
+  padding:36px 30px 34px;
+  border:1px solid rgba(46,33,26,.06);
+  display:flex; flex-direction:column; gap:14px;
+}
+.step__num{
+  font-family:'Cormorant Garamond', serif;
+  font-size:44px; line-height:1; color:var(--brown-300);
+  font-weight:400;
+}
+.step h3{
+  font-size:24px; font-weight:500; line-height:1.2;
+}
+.step p{
+  font-size:14.5px; font-weight:300; color:var(--brown-700); line-height:1.6;
+}
+.step ul{
+  margin-top:4px; padding-left:18px;
+  display:grid; gap:6px;
+  font-size:14px; font-weight:300; color:var(--brown-500);
+}
+.step ul li::marker{ color:var(--brown-300); }
+
+/* ===================== CONTACT ===================== */
+.contact{
+  display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;
+}
+.contact__list{
+  list-style:none; margin-top:36px;
+  display:grid; gap:22px;
+}
+.contact__list li{
+  display:grid; gap:3px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--brown-100);
+}
+.contact__list span{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--brown-500);
+}
+.contact__list strong{
+  font-weight:400; font-size:17px;
+}
+
+.hours-card{
+  background:var(--white);
+  border-radius:24px;
+  padding:44px 40px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(46,33,26,.05);
+}
+.hours-card h3{
+  font-size:30px; margin-bottom:26px;
+}
+.hours-card dl{
+  display:grid; gap:14px; margin-bottom:32px;
+}
+.hours-card dl div{
+  display:flex; justify-content:space-between; gap:20px;
+  font-size:15px; padding-bottom:14px;
+  border-bottom:1px dashed var(--brown-100);
+}
+.hours-card dt{ color:var(--brown-500); font-weight:300; }
+.hours-card dd{ font-weight:400; }
+.hours-card .btn{ width:100%; }
+
+/* ===================== FOOTER ===================== */
+.footer{
+  background:var(--brown-900);
+  color:var(--cream);
+  padding:64px 0 40px;
+  margin-top:40px;
+}
+.footer__inner{
+  display:flex; justify-content:space-between; align-items:flex-start;
+  gap:40px; flex-wrap:wrap;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(250,246,240,.14);
+}
+.footer .logo{ color:var(--cream); font-size:30px; }
+.footer .logo span{ color:var(--brown-300); }
+.footer__tagline{
+  margin-top:12px; max-width:34ch;
+  font-size:14px; font-weight:300; color:var(--brown-100);
+}
+.footer__links{ display:flex; gap:32px; flex-wrap:wrap; }
+.footer__links a{
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  text-decoration:none; color:var(--brown-100);
+  transition:color .25s ease;
+}
+.footer__links a:hover{ color:#fff; }
+.footer__bottom{
+  padding-top:26px; display:flex; justify-content:space-between;
+  gap:20px; flex-wrap:wrap;
+  font-size:12px; font-weight:300; color:var(--brown-300);
+}
+
+/* ===================== REVEAL ===================== */
+.reveal{
+  opacity:0; transform:translateY(26px);
+  transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.3,1);
+}
+.reveal.visible{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+  .reveal{ opacity:1; transform:none; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 980px){
+  .hero{ grid-template-columns:1fr; gap:56px; padding-top:130px; }
+  .hero__media{ order:-1; max-width:440px; }
+  .hero__badge{ left:auto; right:-12px; bottom:28px; }
+  .menu-grid{ grid-template-columns:repeat(2, 1fr); }
+  .contact{ grid-template-columns:1fr; gap:48px; }
+  .gallery{ grid-template-columns:repeat(2, 1fr); }
+  .gallery figure:first-child{ grid-column:span 2; aspect-ratio:16/9; }
+
+  .adopt-intro{ grid-template-columns:1fr; gap:40px; }
+  .adopt-grid{ grid-template-columns:repeat(2, 1fr); }
+  .steps{ grid-template-columns:1fr; }
+}
+
+@media (max-width: 900px){
+  .nav__links{
+    position:fixed; top:0; right:0; bottom:0;
+    width:80%; max-width:330px;
+    background:var(--cream);
+    flex-direction:column; align-items:flex-start;
+    padding:110px 36px 40px; gap:6px;
+    transform:translateX(100%);
+    transition:transform .45s cubic-bezier(.2,.7,.3,1);
+    box-shadow:-30px 0 80px -50px rgba(46,33,26,.9);
+    margin-left:0;
+  }
+  .nav__links.open{ transform:translateX(0); }
+  .nav__links a{
+    font-size:19px; letter-spacing:.02em; text-transform:none;
+    font-family:'Cormorant Garamond', serif;
+    padding:12px 0; width:100%;
+  }
+  .nav__inner .btn{ display:none; }
+  .burger{ display:flex; margin-left:auto; }
+}
+
+@media (max-width: 640px){
+  .hero{ padding-top:118px; padding-bottom:70px; }
+  .hero__meta{ gap:32px; }
+  .hero__meta div strong{ font-size:24px; }
+  .menu-grid{ grid-template-columns:1fr; }
+  .adopt-grid{ grid-template-columns:1fr; }
+  .section{ padding:80px 0; }
+  .section__head{ margin-bottom:44px; }
+  .hours-card{ padding:32px 26px; }
+  .footer__inner{ flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#top" class="logo">мур<span>.</span></a>
+
+    <nav class="nav__links" id="navLinks">
+      <a href="#menu">Меню</a>
+      <a href="#cats">Коти</a>
+      <a href="#adopt" class="accent">Хвостики</a>
+      <a href="#about">Про нас</a>
+      <a href="#contact">Контакти</a>
+    </nav>
+
+    <a href="#contact" class="btn">Забронювати</a>
+
+    <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero__content">
+    <p class="eyebrow">Котокафе у центрі Львова</p>
+    <h1>Кава, коти<br>та трохи <em>тиші</em></h1>
+    <p class="hero__lead">
+      Затишний простір, де можна випити каву, погортати книжку
+      й посидіти на колінах у кота. Або навпаки — це вже як домовитесь.
+    </p>
+
+    <div class="hero__actions">
+      <a href="#menu" class="btn">Переглянути меню</a>
+      <a href="#adopt" class="btn btn--ghost">Прихистити котика</a>
+    </div>
+
+    <div class="hero__meta">
+      <div><strong>12</strong><small>котів живе тут</small></div>
+      <div><strong>6</strong><small>років затишку</small></div>
+      <div><strong>4.9</strong><small>рейтинг гостей</small></div>
+    </div>
+  </div>
+
+  <div class="hero__media">
+    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=80"
+         alt="Рудий кіт лежить на світлій ковдрі">
+    <div class="hero__badge">
+      Мурчик
+      <small>головний менеджер</small>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENU ===================== -->
+<section class="section" id="menu">
+  <div class="container">
+    <header class="section__head reveal">
+      <p class="eyebrow">Меню</p>
+      <h2>Смачного <em>мурчання</em></h2>
+      <p>
+        Готуємо щодня з локальних продуктів. Каву для нас обсмажують
+        у сусідній пекарні, а десерти робить кондитерка, яку ми
+        підозрюємо в любові до котів.
+      </p>
+    </header>
+
+    <div class="menu-grid">
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80"
+               alt="Флет вайт із молочною пінкою" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Флет Вайт</h3><span class="dish__price">65 ₴</span></div>
+          <p>Подвійне еспресо та оксамитове молоко</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
+               alt="Капучино у керамічній чашці" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Капучино</h3><span class="dish__price">60 ₴</span></div>
+          <p>Класика з густою пінкою та корицею</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=800&q=80"
+               alt="Лате з карамеллю" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Лате з карамеллю</h3><span class="dish__price">75 ₴</span></div>
+          <p>Солодка карамель і дрібка морської солі</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=800&q=80"
+               alt="Еспресо у маленькій чашці" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Еспресо</h3><span class="dish__price">45 ₴</span></div>
+          <p>Щільне, з горіховим посмаком</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=800&q=80"
+               alt="Гаряче какао з маршмелоу" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Какао з маршмелоу</h3><span class="dish__price">70 ₴</span></div>
+          <p>Гаряче какао на молоці, без компромісів</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80"
+               alt="Матча-лате зеленого кольору" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Матча-лате</h3><span class="dish__price">80 ₴</span></div>
+          <p>Церемоніальна матча на вівсяному молоці</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80"
+               alt="Мигдалевий круасан" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Круасан з мигдалем</h3><span class="dish__price">85 ₴</span></div>
+          <p>Хрустке тісто, мигдалевий крем, цукрова пудра</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80"
+               alt="Шматок чізкейка" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Чізкейк «Мурчик»</h3><span class="dish__price">95 ₴</span></div>
+          <p>Ніжний вершковий сир і пісочна основа</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"
+               alt="Брауні з горіхами" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Брауні з горіхом</h3><span class="dish__price">90 ₴</span></div>
+          <p>Темний шоколад і волоський горіх</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80"
+               alt="Печиво з шоколадом" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Печиво з шоколадом</h3><span class="dish__price">55 ₴</span></div>
+          <p>М'яке всередині, шоколадні краплі зверху</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=800&q=80"
+               alt="Медовик" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Медовик</h3><span class="dish__price">80 ₴</span></div>
+          <p>Багато тонких коржів і сметанний крем</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="dish__img">
+          <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=800&q=80"
+               alt="Синнабон з корицею" loading="lazy">
+        </div>
+        <div class="dish__body">
+          <div class="dish__row"><h3>Синнабон</h3><span class="dish__price">85 ₴</span></div>
+          <p>Кориця, цукрова глазур, тепло</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATS ===================== -->
+<section class="section section--tint" id="cats">
+  <div class="container">
+    <header class="section__head reveal">
+      <p class="eyebrow">Коти</p>
+      <h2>Ті, хто тут <em>головний</em></h2>
+      <p>
+        Усі наші коти — з притулків. Вони живуть тут постійно,
+        мають власні ліжка, графік сну й дуже стійку думку про те,
+        кому сьогодні дістанеться увага.
+      </p>
+    </header>
+
+    <div class="gallery reveal">
+      <figure>
+        <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1000&q=80"
+             alt="Сірий кіт дивиться в камеру" loading="lazy">
+        <figcaption>Мурчик · 4 роки</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=800&q=80"
+             alt="Рудий кіт на підвіконні" loading="lazy">
+        <figcaption>Лате · 2 роки</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=800&q=80"
+             alt="Кіт спить на кріслі" loading="lazy">
+        <figcaption>Баґет · 6 років</figcaption>
+      </figure>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80"
+             alt="Кіт лежить на світлій ковдрі" loading="lazy">
+        <figcaption>Пінка · 3 роки</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ADOPTION ===================== -->
+<section class="section" id="adopt">
+  <div class="container">
+
+    <div class="adopt-intro reveal">
+      <div class="adopt-intro__text">
+        <p class="eyebrow">Хвостики шукають дім</p>
+        <h2>Прихистити<br><em>котика</em></h2>
+        <p>
+          Деякі з наших котів готові переїхати до люблячої родини.
+          Ми не поспішаємо й не віддаємо котика першому, хто зайшов на каву —
+          нам важливо, щоб вам і хвостику було добре надовго.
+        </p>
+        <p>
+          Тому процес простий, але уважний: спочатку знайомство,
+          потім співбесіда, і лише тоді — дім. Усі деталі нижче.
+        </p>
+      </div>
+      <div class="adopt-intro__img">
+        <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=1000&q=80"
+             alt="Кошеня дивиться у камеру" loading="lazy">
+      </div>
+    </div>
+
+    <!-- adoptable cats -->
+    <div class="adopt-grid">
+
+      <article class="adopt-card reveal">
+        <div class="adopt-card__img">
+          <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80"
+               alt="Сірий кіт Мурчик" loading="lazy">
+          <span class="adopt-card__tag">шукає дім</span>
+        </div>
+        <div class="adopt-card__body">
+          <div class="adopt-card__row">
+            <h3>Мурчик</h3>
+            <span class="adopt-card__age">4 роки</span>
+          </div>
+          <p class="adopt-card__desc">
+            Спокійний, ласкавий, любить сидіти поруч і спостерігати.
+            Ідеальний для тихої квартири без інших тварин.
+          </p>
+          <div class="adopt-card__meta">
+            <span>самець</span><span>стерилізований</span><span>щеплений</span>
+          </div>
+          <a href="#contact" class="btn btn--small">Забрати котика</a>
+        </div>
+      </article>
+
+      <article class="adopt-card reveal">
+        <div class="adopt-card__img">
+          <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=800&q=80"
+               alt="Рудий кіт Лате" loading="lazy">
+          <span class="adopt-card__tag">шукає дім</span>
+        </div>
+        <div class="adopt-card__body">
+          <div class="adopt-card__row">
+            <h3>Лате</h3>
+            <span class="adopt-card__age">2 роки</span>
+          </div>
+          <p class="adopt-card__desc">
+            Молодий, активний, обожнює іграшки й високі полиці.
+            Чудово ладнає з дітьми та іншими котами.
+          </p>
+          <div class="adopt-card__meta">
+            <span>самець</span><span>кастрований</span><span>щеплений</span>
+          </div>
+          <a href="#contact" class="btn btn--small">Забрати котика</a>
+        </div>
+      </article>
+
+      <article class="adopt-card reveal">
+        <div class="adopt-card__img">
+          <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=800&q=80"
+               alt="Кіт Баґет" loading="lazy">
+          <span class="adopt-card__tag">шукає дім</span>
+        </div>
+        <div class="adopt-card__body">
+          <div class="adopt-card__row">
+            <h3>Баґет</h3>
+            <span class="adopt-card__age">6 років</span>
+          </div>
+          <p class="adopt-card__desc">
+            Дорослий, мудрий, майже завжди спить на кріслі.
+            Шукає спокійний дім, де поважають особистий простір.
+          </p>
+          <div class="adopt-card__meta">
+            <span>самець</span><span>кастрований</span><span>щеплений</span>
+          </div>
+          <a href="#contact" class="btn btn--small">Забрати котика</a>
+        </div>
+      </article>
+
+      <article class="adopt-card reveal">
+        <div class="adopt-card__img">
+          <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80"
+               alt="Кішка Пінка" loading="lazy">
+          <span class="adopt-card__tag">шукає дім</span>
+        </div>
+        <div class="adopt-card__body">
+          <div class="adopt-card__row">
+            <h3>Пінка</h3>
+            <span class="adopt-card__age">3 роки</span>
+          </div>
+          <p class="adopt-card__desc">
+            Ніжна й товариська, любить спати під боком.
+            Звикла до лотка й до людей, швидко адаптується.
+          </p>
+          <div class="adopt-card__meta">
+            <span>самка</span><span>стерилізована</span><span>щеплена</span>
+          </div>
+          <a href="#contact" class="btn btn--small">Забрати котика</a>
+        </div>
+      </article>
+
+      <article class="adopt-card reveal">
+        <div class="adopt-card__img">
+          <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=800&q=80"
+               alt="Кошеня Пух" loading="lazy">
+          <span class="adopt-card__tag">шукає дім</span>
+        </div>
+        <div class="adopt-card__body">
+          <div class="adopt-card__row">
+            <h3>Пух</h3>
+            <span class="adopt-card__age">8 місяців</span>
+          </div>
+          <p class="adopt-card__desc">
+            Наймолодший мешканець. Гравці, допитливий і дуже соціальний.
+            Потребує уваги й активних ігор.
+          </p>
+          <div class="adopt-card__meta">
+            <span>самець</span><span>кастрований</span><span>щеплений</span>
+          </div>
+          <a href="#contact" class="btn btn--small">Забрати котика</a>
+        </div>
+      </article>
+
+      <article class="adopt-card reveal">
+        <div class="adopt-card__img">
+          <img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?auto=format&fit=crop&w=800&q=80"
+               alt="Кішка Мʼята" loading="lazy">
+          <span class="adopt-card__tag">шукає дім</span>
+        </div>
+        <div class="adopt-card__body">
+          <div class="adopt-card__row">
+            <h3>Мʼята</h3>
+            <span class="adopt-card__age">5 років</span>
+          </div>
+          <p class="adopt-card__desc">
+            Тиха, охайна, любить дивитись у вікно.
+            Ідеальна для людини, яка багато працює вдома.
+          </p>
+          <div class="adopt-card__meta">
+            <span>самка</span><span>стерилізована</span><span>щеплена</span>
+          </div>
+          <a href="#contact" class="btn btn--small">Забрати котика</a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- steps -->
+    <header class="section__head reveal" style="margin-top:100px; margin-bottom:44px;">
+      <p class="eyebrow">Як це працює</p>
+      <h2>Три кроки <em>до дому</em></h2>
+      <p>
+        Ми не хочемо ускладнювати, але й не поспішаємо. Ось як проходить
+        процес адопції в нашому котокафе — від першого «привіт» до
+        щасливого «ласкаво просимо додому».
+      </p>
+    </header>
+
+    <div class="steps">
+
+      <div class="step reveal">
+        <div class="step__num">01</div>
+        <h3>Бронювання</h3>
+        <p>
+          Ви обираєте котика, який вам сподобався, і залишаєте заявку
+          через кнопку «Забрати котика» або телефоном. Ми зв'язуємось
+          і узгоджуємо час візиту.
+        </p>
+        <ul>
+          <li>заявка онлайн або дзвінком</li>
+          <li>підтвердження дати й часу</li>
+          <li>без передоплати</li>
+        </ul>
+      </div>
+
+      <div class="step reveal">
+        <div class="step__num">02</div>
+        <h3>Знайомство та співбесіда</h3>
+        <p>
+          Ви приходьте до кафе, знайомитесь із котиком у звичній
+          для нього атмосфері, а ми спілкуємось із вами — щоб
+          переконатися, що ви зможете забезпечити хвостику
+          нормальне життя.
+        </p>
+        <ul>
+          <li>живе знайомство з котиком</li>
+          <li>розмова про умови утримання</li>
+          <li>перевірка, чи всі вдома згодні</li>
+        </ul>
+      </div>
+
+      <div class="step reveal">
+        <div class="step__num">03</div>
+        <h3>Передача котика</h3>
+        <p>
+          Якщо все гаразд — ми віддаємо котика разом із його
+          паспортом, де вказані щеплення, обробки й огляди.
+          Далі ви вже вдома, а ми залишаємось на зв'язку.
+        </p>
+        <ul>
+          <li>паспорт із щепленнями</li>
+          <li>рекомендації щодо адаптації</li>
+          <li>підтримка після адопції</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="section section--tint" id="about">
+  <div class="container">
+    <header class="section__head reveal" style="max-width:720px">
+      <p class="eyebrow">Про нас</p>
+      <h2>Маленьке місце<br>з <em>великим</em> серцем</h2>
+      <p>
+        Ми відкрились у 2019 році як маленька кав'ярня на шість столів.
+        Сьогодні тут живуть дванадцять котів, щовечора проходять
+        «тихі години» без музики, а кожен гість, який узяв кота на руки,
+        отримує знижку на другу каву.
+      </p>
+    </header>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact">
+
+      <div class="reveal">
+        <p class="eyebrow">Контакти</p>
+        <h2 style="font-size:clamp(32px,4vw,50px); line-height:1.1">
+          Зв'яжіться<br>з нами
+        </h2>
+        <p style="margin-top:18px; font-weight:300; color:var(--brown-700); font-size:16px; max-width:44ch;">
+          Пишіть або телефонуйте — і для бронювання столика,
+          і щоб почати процес адопції котика.
+        </p>
+
+        <ul class="contact__list">
+          <li><span>Адреса</span><strong>вул. Вірменська, 24, Львів</strong></li>
+          <li><span>Телефон</span><strong>+380 32 123 45 67</strong></li>
+          <li><span>Пошта</span><strong>hello@mur.cafe</strong></li>
+          <li><span>Соцмережі</span><strong>@mur.cafe</strong></li>
+        </ul>
+      </div>
+
+      <div class="hours-card reveal">
+        <h3>Години роботи</h3>
+        <dl>
+          <div><dt>Понеділок — П'ятниця</dt><dd>09:00 — 21:00</dd></div>
+          <div><dt>Субота</dt><dd>10:00 — 22:00</dd></div>
+          <div><dt>Неділя</dt><dd>10:00 — 20:00</dd></div>
+          <div><dt>Тихі години</dt><dd>19:00 — 20:00</dd></div>
+        </dl>
+        <a href="tel:+380321234567" class="btn">Забронювати / Прихистити</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <a href="#top" class="logo">мур<span>.</span></a>
+        <p class="footer__tagline">
+          Котокафе, де кава гаряча, коти — пухнасті,
+          а час іде трохи повільніше.
+        </p>
+      </div>
+
+      <nav class="footer__links">
+        <a href="#menu">Меню</a>
+        <a href="#cats">Коти</a>
+        <a href="#adopt">Хвостики</a>
+        <a href="#about">Про нас</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2025 Мур · котокафе. Усі коти вимиті й нагодовані.</span>
+      <span>Зроблено з любов'ю до кави та котів</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Sticky nav ---------- */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ---------- Mobile menu ---------- */
+const burger   = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* ---------- Reveal on scroll ---------- */
+const revealItems = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${(i % 3) * 80}ms`;
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  revealItems.forEach(el => io.observe(el));
+} else {
+  revealItems.forEach(el => el.classList.add('visible'));
+}
+</script>
+
+</body>
+</html>
